@@ -4,6 +4,7 @@
   "files": [ "./packages/*" ],
   "workspaces": ["packages/*"],
   "scripts": {
+    "build:dep": "yarn workspace zefir-common run build yarn workspaces run build",
     "build": "yarn workspaces run build"
   }
 }

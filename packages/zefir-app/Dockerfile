@@ -17,9 +17,9 @@ WORKDIR /app
 
 COPY yarn.lock ./
 COPY ./package.json ./
-
 COPY ./packages/zefir-app/package.json ./packages/zefir-app/
-RUN yarn install --production --ignore-scripts --prefer-offline
+
+RUN npm prune --production
 
 ENV NODE_ENV production
 

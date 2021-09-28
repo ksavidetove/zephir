@@ -49,7 +49,7 @@
     "rxjs": "^7.2.0",
     "stream-reduce": "^1.0.3",
     "typeorm": "^0.2.37",
-    "zefir-common": "*"
+    "zefir-common": "0.0.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

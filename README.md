@@ -10,9 +10,12 @@ The backend is an Apollo Federation consisting of :
   * An API Gateway project (zefir-backend)
   * A Microservice (users-microservice)
 
-## Installation
+## Prerequisites
 
-**Docker** should be installed first
+For this project you will need :
+ * **Docker**
+
+## Installation
 
 To start the project run this command at the root, X being the number of microservices to start
 ```bash

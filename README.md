@@ -26,9 +26,9 @@ docker-compose up --scale users-microservice=X
 
 At startup, navigate to **localhost:3000** to access the website
 
-The gateway is located at **localhost:4000**
+The gateway is located at **localhost:4000/graphql**
 
-The microservice is accessed through an nginx proxy at **localhost:5000**
+The microservice is accessed through an nginx proxy at **localhost:5000/graphql** for Subscriptions and **localhost:5000/graphql** for the rest of the graphql calls
 
 ## Local Usage
 

@@ -19,10 +19,16 @@ const ModalComponent: React.FunctionComponent = () => {
   const [showTime, setShowTime] = useState(false);
   const [processResponse, setProcessResponse] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
-  let startTime = 0;
+  const [startTime, setStartTime] = useState(0);
   const [email, setEmail] = useState('');
 
-  const handleCloseModal = () => setShowModal(false);
+  const handleCloseModal = () => {
+    setShowTime(false);
+    setProcessResponse(false);
+    setElapsedTime(0);
+    setEmail('');
+    setShowModal(false);
+  }
   const handleShowModal = () => setShowModal(true);
 
   const handleShowTime = () => setShowTime(true);
@@ -34,12 +40,12 @@ const ModalComponent: React.FunctionComponent = () => {
   }
 
   const onMutationCompleted = (data: any) => {
-    console.log(data);
     responseEnded();
   }
 
   const onMutationError = (error: ApolloError) => {
     console.log(error);
+    alert(error.message);
     responseEnded();
   }
 
@@ -54,7 +60,7 @@ const ModalComponent: React.FunctionComponent = () => {
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    startTime = performance.now();
+    setStartTime(performance.now());
     setProcessResponse(true);
     createUserMutation({ variables: { email }, onCompleted: onMutationCompleted, onError: onMutationError });
   };
@@ -73,7 +79,7 @@ const ModalComponent: React.FunctionComponent = () => {
         animation={false}
       >
         <Form onSubmit={handleFormSubmit}>
-          <Modal.Header closeButton closeLabel={''}>
+          <Modal.Header closeButton={!processResponse} closeLabel={''}>
             <Modal.Title>Creation Utilisateur</Modal.Title>
           </Modal.Header>
 

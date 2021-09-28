@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {Row, Col, Container, Card, Spinner} from 'react-bootstrap';
 import {gql, useQuery} from "@apollo/client";
@@ -31,16 +31,22 @@ subscription OnUserCreated {
 `;
 
 const UsersComponent: React.FunctionComponent = () => {
-  const { data = { users: []}, loading, error, subscribeToMore } = useQuery<{users: UserDto[]}>(USERS_QUERY, {onError: error1 => console.log('!ERROR')});
+  const [users, setUsers] = useState<UserDto[]>([]);
+
+  let { data = { users: []}, loading, error, subscribeToMore } =
+    useQuery<{users: UserDto[]}>(USERS_QUERY, {
+      onCompleted: data => setUsers(data.users),
+      onError: error1 => { alert(error1.message); console.log(error1)}
+    });
 
   useEffect(() => {
     const unsubscribe = subscribeToMore<{ userCreated: UserDto }>({
       document: USER_SUB,
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
-        const newUser = subscriptionData.data.userCreated;
-        const users = { users: [...prev.users, newUser] };
-        return users;
+        const newUsers = [...prev.users, subscriptionData.data.userCreated];
+        setUsers(u => newUsers);
+        return { users: newUsers };
       }
     });
     return () => unsubscribe();
@@ -62,7 +68,7 @@ const UsersComponent: React.FunctionComponent = () => {
   return (
     <Container>
       <Row xs={1} md={3} className="g-4">
-        {data.users.map((user: UserDto, idx) => (
+        {users.map((user: UserDto, idx) => (
           <Col key={idx}>
             <Card>
               <Card.Header>{user.email}</Card.Header>

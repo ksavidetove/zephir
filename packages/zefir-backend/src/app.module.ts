@@ -20,7 +20,6 @@ import { ConfigModule, ConfigType } from '@nestjs/config';
               url: `${config.usersUri}/graphql-federated`,
             },
           ],
-          debug: true,
           serviceHealthCheck: true,
         },
       }),

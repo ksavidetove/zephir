@@ -1,0 +1,92 @@
+{
+  "name": "users-microservice",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "typeorm": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.js",
+    "migrate:create": "ts-node ./node_modules/typeorm/cli.js migration:create -f src/database/ormconfig.ts -n",
+    "migrate:up:dev": "cross-env NODE_ENV=development ts-node ./node_modules/typeorm/cli.js migration:run -f src/database/ormconfig.ts",
+    "migrate:up:prod": "cross-env NODE_ENV=production ts-node ./node_modules/typeorm/cli.js migration:run -f src/database/ormconfig.ts",
+    "migrate:down:dev": "cross-env NODE_ENV=development ts-node ./node_modules/typeorm/cli.js migration:revert -f src/database/ormconfig.ts",
+    "migrate:down:prod": "cross-env NODE_ENV=production ts-node ./node_modules/typeorm/cli.js migration:revert -f src/database/ormconfig.ts",
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \\\"src/**/*.ts\\\" ",
+    "start": "nest start",
+    "start:dev": "cross-env NODE_ENV=development nest start --watch",
+    "start:debug": "cross-env NODE_ENV=development nest start --debug --watch",
+    "start:prod": "cross-env NODE_ENV=production node dist/main",
+    "start:nodemon": "npx nodemon server.js --ext ts",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+  },
+  "dependencies": {
+    "@apollo/federation": "^0.33.0",
+    "@graphql-tools/utils": "7",
+    "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^1.0.1",
+    "@nestjs/core": "^8.0.0",
+    "@nestjs/graphql": "^9.0.4",
+    "@nestjs/microservices": "^8.0.6",
+    "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/typeorm": "^8.0.2",
+    "apollo-server-core": "^3.3.0",
+    "apollo-server-express": "^3.3.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "event-stream": "^4.0.1",
+    "graphql": "^15.5.3",
+    "graphql-subscriptions": "^1.2.1",
+    "pg": "^8.7.1",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.2.0",
+    "stream-reduce": "^1.0.3",
+    "typeorm": "^0.2.37",
+    "zefir-common": "*"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^8.0.0",
+    "@nestjs/schematics": "^8.0.0",
+    "@nestjs/testing": "^8.0.0",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.0.0",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.3",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
+    "tsconfig-paths": "^3.10.1",
+    "typescript": "^4.3.5"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}

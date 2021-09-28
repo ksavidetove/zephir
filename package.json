@@ -1,0 +1,9 @@
+{
+  "name": "zefir",
+  "private": true,
+  "files": [ "./packages/*" ],
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "yarn workspaces run build"
+  }
+}

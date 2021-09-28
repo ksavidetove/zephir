@@ -1,0 +1,42 @@
+type User {
+    """email address of the user"""
+    email: String!
+
+    """result of fibonacci"""
+    fib: Float!
+
+    """email address of the user"""
+    anagram_map: [AnagramCount!]!
+}
+
+type AnagramCount {
+    """One of the multiple anagrams as key"""
+    key: String!
+
+    """count of anagrams"""
+    count: Int!
+}
+
+type CreateUser {
+    """primary key autoincremented"""
+    id: Float!
+
+    """email address of the user"""
+    email: String!
+
+    """result of fibonacci"""
+    fib: Float!
+}
+
+type Query {
+    users: [User!]!
+}
+
+type Mutation {
+    createUser(data: UserInput!): CreateUser!
+}
+
+input UserInput {
+    """email address of the user"""
+    email: String!
+}

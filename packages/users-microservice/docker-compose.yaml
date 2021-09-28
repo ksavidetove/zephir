@@ -1,0 +1,15 @@
+version: "2.4"
+services:
+  local_zefir-db:
+    image: "postgres:11"
+    container_name: local_zefir-db
+    ports:
+      - "54321:5432"
+    environment:
+      POSTGRES_PASSWORD: "secret"
+      PGUSER: postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
